@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Mipo</string>
     <string name="expenses">Expenses</string>
+    <string-array name="expense_methods">
+        <item>Cash</item>
+        <item>Card</item>
+        <item>UPI</item>
+        <item>Net Banking</item>
+    </string-array>
 </resources>

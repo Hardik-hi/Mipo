@@ -80,12 +80,45 @@
     android:inputType="textPersonName"
     />
 
-
-    <Button
-        android:id="@+id/newTaskButton"
+    <TextView
+        android:id="@+id/expenseMethod"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/newExpenseRemark"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/newExpenseRemark"
+        android:text="Method"
+        android:textColor="@android:color/black"
+        android:textSize="23sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/newExpenseMethod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/expenseMethod"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:hint="Payment method"
+        android:padding="4dp"
+        android:spinnerMode="dropdown"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <Button
+        android:id="@+id/newExpenseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick date"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/newExpenseMethod"
+        android:onClick="showDatePickerDialog" />
+
+    <Button
+        android:id="@+id/newExpenseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/newExpenseDate"
         android:textSize="16sp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="12dp"
