@@ -17,7 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements DialogCloseListener {
+public class MainActivity extends AppCompatActivity{
     private FloatingActionButton fab;
 
 
@@ -60,11 +60,11 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
     }
 
     //to handle closing of the dialog
-    @Override
+    /*@Override
     public void handleDialogClose(DialogInterface dialog){
-       /* expenseList = db.getAllTasks();
+       expenseList = db.getAllTasks();
         Collections.reverse(taskList);
         expenseAdapter.setExpenseList(expenseList);
-        expenseAdapter.notifyDataSetChanged();*/
-    }
+        expenseAdapter.notifyDataSetChanged();
+    }*/
 }

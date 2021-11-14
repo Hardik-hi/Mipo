@@ -5,12 +5,14 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ViewExpenses extends AppCompatActivity {
+public class ViewExpenses extends AppCompatActivity implements DialogCloseListener{
 
     //private DatabaseHandler db;
     private RecyclerView expenseRecyclerView;
@@ -34,6 +36,7 @@ public class ViewExpenses extends AppCompatActivity {
         //for testing
         ExpenseModel exp=new ExpenseModel("10/11/21","hardik","upi",30.0,"wow");
 
+        expenseList=new ArrayList<>();
         expenseList.add(exp);
         expenseList.add(exp);
         expenseList.add(exp);
@@ -43,5 +46,14 @@ public class ViewExpenses extends AppCompatActivity {
         //Collections.reverse(expenseList);
 
         expenseAdapter.setExpenseList(expenseList);
+    }
+
+    //to handle closing of the dialog
+    @Override
+    public void handleDialogClose(DialogInterface dialog){
+        //expenseList = db.getAllTasks();
+        Collections.reverse(expenseList);
+        expenseAdapter.setExpenseList(expenseList);
+        expenseAdapter.notifyDataSetChanged();
     }
 }

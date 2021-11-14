@@ -182,7 +182,7 @@ public class AddExpense extends BottomSheetDialogFragment {
             public void onClick(View v) {
 
                 //amount of expense
-                double amount = Double.parseDouble(bundle.getString("amount").toString());
+                double amount = Double.parseDouble(newExpenseAmount.getText().toString());
 
                 //name of person
                 String person=newExpensePerson.getText().toString();
@@ -199,6 +199,7 @@ public class AddExpense extends BottomSheetDialogFragment {
                 if(finalIsUpdate){
                     //update the db entry
                     //db.updateTask(bundle.getInt("id"), text);
+                    Toast.makeText(getActivity(),"Entry updts successfully!",Toast.LENGTH_SHORT).show();
                 }
                 else {
                     //create a new expense and add it to the db

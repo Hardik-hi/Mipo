@@ -14,11 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHolder> {
 
-    private List<ExpenseModel> expenseList;
+    private List<ExpenseModel> expenseList=new ArrayList<>();
     //private DatabaseHandler db;
     private ViewExpenses activity;
 
