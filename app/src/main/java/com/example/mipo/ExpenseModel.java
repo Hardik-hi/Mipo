@@ -3,8 +3,8 @@ package com.example.mipo;
 public class ExpenseModel {
     private int id;
     private String date;
-    private String person;
     private String payment_mode;
+    private String person;
     private Double amount;
     private String remarks;
 
@@ -27,14 +27,14 @@ public class ExpenseModel {
 
     @Override
     public String toString(){
-        return "TransactionModel{" +
+        return "ExpenseModel{" +
                 "date = " + date +
                 ", details = " + person +
                 ", payment_mode = " + payment_mode +
                 ", remarks = " + remarks +
                 "}";
     }
-    
+
     public int getId() {
         return id;
     }
@@ -42,29 +42,13 @@ public class ExpenseModel {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public String getDate() {
         return date;
     }
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
-    public String getRemarks() {
-        return remarks;
-    }
-
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
     }
 
     public String getPayment_mode() {
@@ -81,5 +65,21 @@ public class ExpenseModel {
 
     public void setPerson(String person) {
         this.person = person;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

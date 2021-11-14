@@ -182,7 +182,7 @@ public class AddExpense extends BottomSheetDialogFragment {
             public void onClick(View v) {
 
                 //amount of expense
-                double amount=-1.0;
+                Double amount=-1.0;
                 amount = Double.parseDouble(newExpenseAmount.getText().toString());
 
                 //name of person
@@ -202,10 +202,11 @@ public class AddExpense extends BottomSheetDialogFragment {
 
                 if(finalIsUpdate){
                     //id of expense
-                    int id=Integer.parseInt(bundle.getString("id"));
-
+                    Toast.makeText(getActivity(), "finalisupdate="+String.valueOf(finalIsUpdate), Toast.LENGTH_SHORT).show();
+                    int id=bundle.getInt("id");
+                    Toast.makeText(getActivity(), "id="+String.valueOf(id), Toast.LENGTH_SHORT).show();
                     boolean success = dbhelper.edit_record(id, date, person, method, amount, remarks);
-
+                    Toast.makeText(getActivity(), "success="+String.valueOf(success), Toast.LENGTH_SHORT).show();
                     if(success == true) {
                         Toast.makeText(getActivity(), "Successfully updated record", Toast.LENGTH_SHORT).show();
                     } else Toast.makeText(getActivity(), "Failed to update record", Toast.LENGTH_SHORT).show();
