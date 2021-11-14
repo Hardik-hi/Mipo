@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 public class ViewExpenses extends AppCompatActivity implements DialogCloseListener{
@@ -35,20 +36,23 @@ public class ViewExpenses extends AppCompatActivity implements DialogCloseListen
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(expenseAdapter));
         itemTouchHelper.attachToRecyclerView(expenseRecyclerView);
 
-        //for testing
-        ExpenseModel exp=new ExpenseModel("10/11/21","hardik","upi",30.0,"wow");
-        expenseList.add(exp);
-        expenseList.add(exp);
-        expenseList.add(exp);
-        expenseList.add(exp);
+        DBHelper dbHelper = new DBHelper(ViewExpenses.this);
+        List<ExpenseModel> expenseModelList = dbHelper.viewAll();
+
+//        Iterator it = expenseModelList.iterator();
+//
+//        while(it.hasNext()){
+//            expenseList.add((ExpenseModel) it.next());
+//        }
+        for(int i = 0; i < expenseModelList.size(); i++){
+            expenseList.add(expenseModelList.get(i));
+        }
 
         //expenseList = db.getAllTasks();
         //Collections.reverse(expenseList);
-
         expenseAdapter.setExpenseList(expenseList);
 
-        DBHelper dbHelper = new DBHelper(ViewExpenses.this);
-        List<ExpenseModel> expenseModelList = dbHelper.viewAll();
+
     }
 
     //to handle closing of the dialog
