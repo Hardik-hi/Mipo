@@ -228,9 +228,13 @@ public class AddExpense extends BottomSheetDialogFragment {
                     } else Toast.makeText(getActivity(), "Failed to add transaction", Toast.LENGTH_SHORT).show();
                 }
                 //Return values of following functions to be made use of
-                dbhelper.get_highest();
-                dbhelper.get_avg();
-                dbhelper.get_sum();
+                Double temp1 = dbhelper.get_highest();
+                Double temp2 = dbhelper.get_avg();
+                Double temp3 = dbhelper.get_sum();
+                //While actual calls, remove toasts
+                Toast.makeText(getContext(), temp1.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), temp2.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), temp3.toString(), Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });

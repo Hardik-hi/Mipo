@@ -3,6 +3,7 @@ package com.example.mipo;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -77,8 +78,8 @@ public class DBHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
-        cursor.close();
-        db.close();
+//        cursor.close();
+//        db.close();
         return expenseModelList;
     }
 
@@ -111,22 +112,35 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT MAX(" + AMOUNT + ") FROM " + EXPENSES;
         Cursor cursor = db.rawQuery(query, null);
-        Double max = cursor.getDouble(0);
-        return max;
+
+        if(cursor.moveToFirst()) {
+            String cont = DatabaseUtils.dumpCursorToString(cursor);
+            Double max = cursor.getDouble(0);
+            return max;
+        }
+        return 0.0;
     }
     public Double get_avg(){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT AVG(" + AMOUNT + ") FROM " + EXPENSES;
         Cursor cursor = db.rawQuery(query, null);
-        Double avg = cursor.getDouble(0);
-        return avg;
+
+        if(cursor.moveToFirst()) {
+            Double avg = cursor.getDouble(0);
+            return avg;
+        }
+        return 0.0;
     }
 
     public Double get_sum(){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT SUM(" + AMOUNT + ") FROM " + EXPENSES;
         Cursor cursor = db.rawQuery(query, null);
-        Double sum = cursor.getDouble(0);
-        return sum;
+
+        if(cursor.moveToFirst()) {
+            Double sum = cursor.getDouble(0);
+            return sum;
+        }
+        return 0.0;
     }
 }
