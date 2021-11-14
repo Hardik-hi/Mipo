@@ -23,13 +23,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="275dp"
+        android:layout_marginTop="250dp"
 
         android:text="Fabulous!X"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#000000"
-        android:textSize="34sp"
+        android:textSize="36sp"
         android:textStyle="bold" />
 
     <TextView
@@ -40,7 +40,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="217dp"
         android:text="3000/10000 left"
-        android:textColor="#434343" />
+        android:textColor="#434343"
+        android:textSize="16sp" />
+
 
     <ImageView
         android:id="@+id/imageView"
@@ -48,10 +50,10 @@
         android:layout_height="98dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="52dp"
-        android:layout_marginBottom="250dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="245dp"
         android:scaleType="fitCenter"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@mipmap/average" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -60,9 +62,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="227dp"
-        android:layout_marginBottom="250dp"
+        android:layout_marginBottom="245dp"
         android:scaleType="fitCenter"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@mipmap/peak" />
 
     <Button
         android:id="@+id/viewExpensesButton"
@@ -90,13 +92,24 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="54dp"
-        android:layout_marginBottom="207dp"
+        android:layout_marginStart="59dp"
+        android:layout_marginBottom="210dp"
         android:text="2.5K"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/avgMessage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginTop="450dp"
+        android:text="AVERAGE SPEND"
+        android:textAlignment="textStart"
+        android:textColor="#595959" />
 
     <TextView
         android:id="@+id/highestMessage"
@@ -105,12 +118,23 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="226dp"
-        android:layout_marginBottom="206dp"
+        android:layout_marginBottom="210dp"
         android:text="1.2K"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="24sp"
-        android:textStyle="bold"/>
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/highestMessage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="225dp"
+        android:layout_marginTop="450dp"
+        android:text="HIGHEST SPEND"
+        android:textAlignment="textStart"
+        android:textColor="#595959" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -121,7 +145,7 @@
         android:layout_marginEnd="33dp"
         android:layout_marginBottom="32dp"
         android:clickable="true"
-        app:backgroundTint="#3F51B5"
+        app:backgroundTint="@color/purple_500"
         app:srcCompat="@android:drawable/ic_input_add" />
 
 </RelativeLayout>
