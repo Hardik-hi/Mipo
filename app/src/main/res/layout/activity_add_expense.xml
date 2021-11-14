@@ -105,14 +105,32 @@
         android:spinnerMode="dropdown"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-    <Button
+    <TextView
+        android:id="@+id/expenseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/newExpenseMethod"
+        android:text="Date"
+        android:textColor="@android:color/black"
+        android:textSize="23sp"
+        android:textStyle="bold" />
+
+    <EditText
         android:id="@+id/newExpenseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pick date"
-        android:layout_marginStart="10dp"
-        android:layout_below="@+id/newExpenseMethod"
-        android:onClick="showDatePickerDialog" />
+        android:layout_below="@+id/expenseDate"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="10dp"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:hint="Pick a date.."
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
 
     <Button
         android:id="@+id/newExpenseButton"
