@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.w3c.dom.Text;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 //    EditText et_amount, et_detail, et_remarks, et_date;
@@ -20,17 +21,20 @@ public class MainActivity extends AppCompatActivity {
 //    Spinner spin_method;
     Button btn_view, btn_budget;
     TextView tw_avg, tw_highest, tw_comm, tw_avail;
+    private FloatingActionButton fab;
 
     public void openExpensesActivity(){
         Intent intent = new Intent(this, ViewExpenses.class);
         startActivity(intent);
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //progress bar
         CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.circularProgress);
         circularProgressBar.setProgress(50);
         circularProgressBar.setProgressColor(Color.CYAN);
@@ -67,13 +71,18 @@ public class MainActivity extends AppCompatActivity {
 //                } else Toast.makeText(MainActivity.this, "Failed to add transaction", Toast.LENGTH_SHORT).show();
 //            }
 //        });
-
         btn_view = (Button) findViewById(R.id.viewExpensesButton);
         tw_avg = (TextView)findViewById(R.id.textView3);
         tw_highest = (TextView) findViewById(R.id.textView4);
         tw_comm = (TextView) findViewById(R.id.textView);
         tw_avail = (TextView) findViewById(R.id.textView2);
-
+        fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddExpense.newInstance().show(getSupportFragmentManager(), AddExpense.TAG);
+            }
+        });
         btn_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
