@@ -35,7 +35,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Calendar;
-import java.util.Objects;
 
 
 public class AddExpense extends BottomSheetDialogFragment {
@@ -142,12 +141,14 @@ public class AddExpense extends BottomSheetDialogFragment {
         boolean isUpdate = false;
 
         //DATABASE COMMANDS OPENING AND SETTING CONN
+
+
         final Bundle bundle = getArguments();
         if(bundle != null){
             isUpdate = true;
 
             //setting the amount
-            String amount = Float.toString(bundle.getFloat("amount"));
+            String amount = Double.toString(bundle.getDouble("amount"));
             newExpenseAmount.setText(amount);
             assert amount != null;
 
@@ -170,9 +171,10 @@ public class AddExpense extends BottomSheetDialogFragment {
             newExpenseDate.setText(date);
             assert date != null;
 
-            if(amount.length()>0 && person.length()>0 && date.length()>0)
+            if(amount.length()>0 && person.length()>0)
                 newExpenseSaveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark));
         }
+
 
         final boolean finalIsUpdate = isUpdate;
         newExpenseSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -180,7 +182,7 @@ public class AddExpense extends BottomSheetDialogFragment {
             public void onClick(View v) {
 
                 //amount of expense
-                Double amount = Double.parseDouble(newExpenseAmount.getText().toString());
+                double amount = Double.parseDouble(bundle.getString("amount").toString());
 
                 //name of person
                 String person=newExpensePerson.getText().toString();
@@ -204,23 +206,7 @@ public class AddExpense extends BottomSheetDialogFragment {
                     task.setTask(text);
                     task.setStatus(0);
                     db.insertTask(task);*/
-                    ExpenseModel expenseModel;
-                    try{
-                        expenseModel = new ExpenseModel(date, person, method, amount, remarks);
-                        Toast.makeText(getActivity(), "Successfully created new transaction", Toast.LENGTH_SHORT).show();
-                    }
-                    catch(Exception e){
-                        Toast.makeText(getActivity(), "Error creating transaction", Toast.LENGTH_SHORT).show();
-                        expenseModel = new ExpenseModel("null", "none", "null", -1.0, "invalid");
-                    }
-
-                    DBHelper dbhelper = new DBHelper(getActivity());
-
-                    boolean success = dbhelper.add_data(expenseModel);
-
-                    if(success == true) {
-                        Toast.makeText(getActivity(), "Successfully added transaction", Toast.LENGTH_SHORT).show();
-                    } else Toast.makeText(getActivity(), "Failed to add transaction", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"Entry added successfully!",Toast.LENGTH_SHORT).show();
                 }
                 dismiss();
             }

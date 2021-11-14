@@ -5,13 +5,14 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ViewExpenses extends AppCompatActivity {
+public class ViewExpenses extends AppCompatActivity implements DialogCloseListener{
 
     //private DatabaseHandler db;
     private RecyclerView expenseRecyclerView;
@@ -47,5 +48,14 @@ public class ViewExpenses extends AppCompatActivity {
 
         DBHelper dbHelper = new DBHelper(ViewExpenses.this);
 
+    }
+
+    //to handle closing of the dialog
+    @Override
+    public void handleDialogClose(DialogInterface dialog){
+        //expenseList = db.getAllTasks();
+        Collections.reverse(expenseList);
+        expenseAdapter.setExpenseList(expenseList);
+        expenseAdapter.notifyDataSetChanged();
     }
 }

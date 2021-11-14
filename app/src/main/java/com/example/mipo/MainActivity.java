@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Collections;
@@ -34,11 +34,15 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         //progress bar
         CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.circularProgress);
         circularProgressBar.setProgress(50);
         circularProgressBar.setProgressColor(Color.CYAN);
         circularProgressBar.setTextColor(Color.BLACK);
+
+
 
         //start the view expense activity
 
@@ -55,7 +59,6 @@ public class MainActivity extends AppCompatActivity{
         tw_comm = (TextView) findViewById(R.id.textView);
         tw_avail = (TextView) findViewById(R.id.textView2);
         fab = findViewById(R.id.floatingActionButton);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,12 +75,11 @@ public class MainActivity extends AppCompatActivity{
     }
 
     //to handle closing of the dialog
-//    @Override
-//    public void handleDialogClose(DialogInterface dialog){
-//       /* expenseList = db.getAllTasks();
-//        Collections.reverse(taskList);
-//        expenseAdapter.setExpenseList(expenseList);
-//        expenseAdapter.notifyDataSetChanged();*/
-//
-//    }
+    /*@Override
+    public void handleDialogClose(DialogInterface dialog){
+       expenseList = db.getAllTasks();
+        Collections.reverse(taskList);
+        expenseAdapter.setExpenseList(expenseList);
+        expenseAdapter.notifyDataSetChanged();
+    }*/
 }
