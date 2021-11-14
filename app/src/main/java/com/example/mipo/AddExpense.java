@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -27,6 +29,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -41,9 +44,11 @@ public class AddExpense extends BottomSheetDialogFragment {
 
     public static final String TAG="ActionBottomDialog";
 
-    private EditText newExpenseAmount;
+    EditText newExpenseAmount;
     private EditText newExpensePerson;
     private EditText newExpenseRemarks;
+    private EditText newExpenseDate;
+    private Spinner newExpenseMethod;
     private Button newExpenseSaveButton;
 
     public static AddExpense newInstance(){
@@ -67,7 +72,8 @@ public class AddExpense extends BottomSheetDialogFragment {
 
         //dropdown list for selecting expense method
         Spinner spinner = (Spinner) view.findViewById(R.id.newExpenseMethod);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), R.layout.expense_method_spinner, R.array.expense_methods);
+        String[] values={"Cash","Card","UPI","Net Banking"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), R.layout.expense_method_spinner, values);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spinner.setAdapter(adapter);
 
@@ -86,6 +92,7 @@ public class AddExpense extends BottomSheetDialogFragment {
 
         return view;
     }
+
     public void openDatePickerDialog(final View v) {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_YEAR, 1);
@@ -105,63 +112,104 @@ public class AddExpense extends BottomSheetDialogFragment {
         datePickerDialog.show();
     }
 
+    /*public void buttonActivator(EditText e){
+        e.addTextChangedListener(new TextWatcher() {
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        newTaskText = Objects.requireNonNull(getView()).findViewById(R.id.newTaskText);
-        newTaskSaveButton = getView().findViewById(R.id.newTaskButton);
-
-        boolean isUpdate = false;
-
-        final Bundle bundle = getArguments();
-        if(bundle != null){
-            isUpdate = true;
-            String task = bundle.getString("task");
-            newTaskText.setText(task);
-            assert task != null;
-            if(task.length()>0)
-                newTaskSaveButton.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorPrimaryDark));
-        }
-
-        db = new DatabaseHandler(getActivity());
-        db.openDatabase();
-
-        newTaskText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(s.toString().equals("")){
-                    newTaskSaveButton.setEnabled(false);
-                    newTaskSaveButton.setTextColor(Color.GRAY);
+                    newExpenseSaveButton.setEnabled(false);
+                    newExpenseSaveButton.setTextColor(Color.GRAY);
                 }
                 else{
-                    newTaskSaveButton.setEnabled(true);
-                    newTaskSaveButton.setTextColor(ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorPrimaryDark));
+                    newExpenseSaveButton.setEnabled(true);
+                    newExpenseSaveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark));
                 }
             }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
         });
+    }
+*/
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        newExpenseAmount = requireView().findViewById(R.id.newExpenseAmount);
+        newExpensePerson = requireView().findViewById(R.id.newExpensePerson);
+        newExpenseRemarks = getView().findViewById(R.id.newExpenseRemark);
+        newExpenseMethod = requireView().findViewById(R.id.newExpenseMethod);
+        newExpenseDate = requireView().findViewById(R.id.newExpenseDate);
+        newExpenseSaveButton = getView().findViewById(R.id.newExpenseButton);
+
+        boolean isUpdate = false;
+
+        //DATABASE COMMANDS OPENING AND SETTING CONN
+
+
+        final Bundle bundle = getArguments();
+        if(bundle != null){
+            isUpdate = true;
+
+            //setting the amount
+            String amount = Float.toString(bundle.getFloat("amount"));
+            newExpenseAmount.setText(amount);
+            assert amount != null;
+
+            //setting the person
+            String person = bundle.getString("person");
+            newExpensePerson.setText(person);
+            assert person != null;
+
+            //setting the remark
+            String remarks = bundle.getString("remarks");
+            newExpenseRemarks.setText(remarks);
+
+            /*setting the method
+            String method = bundle.getString("method");
+            newExpenseMethod.
+            assert method != null;*/
+
+            //setting the date
+            String date = bundle.getString("date");
+            newExpenseDate.setText(date);
+            assert date != null;
+
+            if(amount.length()>0 && person.length()>0 && date.length()>0)
+                newExpenseSaveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark));
+        }
+
 
         final boolean finalIsUpdate = isUpdate;
-        newTaskSaveButton.setOnClickListener(new View.OnClickListener() {
+        newExpenseSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = newTaskText.getText().toString();
+
+                //amount of expense
+                Float amount = Float.parseFloat(bundle.getString("amount").toString());
+
+                //name of person
+                String person=newExpensePerson.getText().toString();
+
+                //remarks
+                String remarks=newExpenseRemarks.getText().toString();
+
+                //date in DD/MM/YYYY format
+                String date=newExpenseDate.getText().toString();
+
+                //method of expense
+                String method=newExpenseMethod.getSelectedItem().toString();;
+
                 if(finalIsUpdate){
-                    db.updateTask(bundle.getInt("id"), text);
+                    //update the db entry
+                    //db.updateTask(bundle.getInt("id"), text);
                 }
                 else {
-                    ToDoModel task = new ToDoModel();
+                    //create a new expense and add it to the db
+                    /* ToDoModel task = new ToDoModel();
                     task.setTask(text);
                     task.setStatus(0);
-                    db.insertTask(task);
+                    db.insertTask(task);*/
+
                 }
                 dismiss();
             }
