@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 
 public class AddExpense extends BottomSheetDialogFragment {
@@ -174,14 +176,14 @@ public class AddExpense extends BottomSheetDialogFragment {
                 newExpenseSaveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark));
         }
 
-
         final boolean finalIsUpdate = isUpdate;
         newExpenseSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //amount of expense
-                double amount = Double.parseDouble(newExpenseAmount.getText().toString());
+                double amount=-1.0;
+                amount = Double.parseDouble(newExpenseAmount.getText().toString());
 
                 //name of person
                 String person=newExpensePerson.getText().toString();
@@ -196,6 +198,7 @@ public class AddExpense extends BottomSheetDialogFragment {
                 String method=newExpenseMethod.getSelectedItem().toString();
                 ExpenseModel expenseModel;
                 DBHelper dbhelper = new DBHelper(getActivity());
+
 
                 if(finalIsUpdate){
                     //id of expense

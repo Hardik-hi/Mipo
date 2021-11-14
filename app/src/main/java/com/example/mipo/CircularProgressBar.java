@@ -23,7 +23,7 @@ public class CircularProgressBar extends View {
     private int mMaxProgress = 100;             // Max progress to use
     private boolean mDrawText = true;           // Set to true if progress text should be drawn
     private boolean mRoundedCorners = true;     // Set to true if rounded corners should be applied to outline ends
-    private int mProgressColor = Color.BLACK;   // Outline color
+    private int mProgressColor = Color.BLUE;   // Outline color
     private int mTextColor = Color.BLACK;       // Progress text color
 
     private final Paint mPaint;                 // Allocate paint outside onDraw to avoid unnecessary object creation
@@ -74,7 +74,7 @@ public class CircularProgressBar extends View {
     private void drawText(Canvas canvas) {
         mPaint.setTextSize(Math.min(mViewWidth, mViewHeight) / 5f);
         mPaint.setTextAlign(Paint.Align.CENTER);
-        mPaint.setStrokeWidth(0);
+        mPaint.setStrokeWidth(9);
         mPaint.setColor(mTextColor);
 
         // Center text
