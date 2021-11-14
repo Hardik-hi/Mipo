@@ -227,6 +227,9 @@ public class AddExpense extends BottomSheetDialogFragment {
                         Toast.makeText(getActivity(), "Successfully added transaction", Toast.LENGTH_SHORT).show();
                     } else Toast.makeText(getActivity(), "Failed to add transaction", Toast.LENGTH_SHORT).show();
                 }
+                //Return values of following functions to be made use of
+                dbhelper.get_highest();
+                dbhelper.get_avg();
                 dismiss();
             }
         });

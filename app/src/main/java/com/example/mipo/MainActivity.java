@@ -33,10 +33,10 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 
     String percentString, savingMessage;
     int savingColor;
-    public void openExpensesActivity(){
-        Intent intent = new Intent(this, ViewExpenses.class);
-        startActivity(intent);
-    }
+//    public void openExpensesActivity(){
+//        Intent intent = new Intent(this, ViewExpenses.class);
+//        startActivity(intent);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,9 +96,6 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         avgMessage.setText(avgSpendMessage);
         highestMessage.setText(highestSpendMessage);
 
-
-
-
         //start the view expense activity
         Button button1 = findViewById(R.id.viewExpensesButton);
         button1.setOnClickListener(view -> {
@@ -114,11 +111,6 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         });
 
         //to add an expense, starts a new fragment
-        btn_view = (Button) findViewById(R.id.viewExpensesButton);
-        tw_avg = (TextView)findViewById(R.id.textView3);
-        tw_highest = (TextView) findViewById(R.id.textView4);
-        tw_comm = (TextView) findViewById(R.id.textView);
-        tw_avail = (TextView) findViewById(R.id.textView2);
         fab = findViewById(R.id.floatingActionButton);
 
         btn_budget = (Button) findViewById(R.id.changeBudgetButton);
@@ -138,12 +130,12 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
             }
         });
 
-        btn_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openExpensesActivity();
-            }
-        });
+//        btn_view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openExpensesActivity();
+//            }
+//        });
     }
     public String convertToNumeral(float num){
         if(num<1000)

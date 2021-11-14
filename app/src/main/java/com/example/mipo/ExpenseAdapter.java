@@ -71,13 +71,14 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
     public void deleteItem(int position) {
         ExpenseModel item = expenseList.get(position);
-//        Toast.makeText(getContext(), item.toString(), Toast.LENGTH_SHORT).show();
         DBHelper dbHelper = new DBHelper(getContext());
         dbHelper.delete_record(item);
 //        expenseList.remove(position);
         Toast.makeText(getContext(), "Successfully deleted record", Toast.LENGTH_SHORT).show();
         notifyItemRemoved(position);
-
+        //Return values of following functions to be made use of
+        dbHelper.get_highest();
+        dbHelper.get_avg();
     }
 
     public void editItem(int position) {
