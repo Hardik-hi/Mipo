@@ -1,6 +1,7 @@
 package com.example.mipo;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,10 +25,11 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
     private List<ExpenseModel> expenseList=new ArrayList<>();
     //private DatabaseHandler db;
     private AppCompatActivity activity;
-
+    private  SharedPreferences sharedPreferences;
     public ExpenseAdapter(AppCompatActivity activity) {
         //this.db = db;
         this.activity = activity;
+        this.sharedPreferences = this.activity.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
     }
 
     @NonNull
@@ -78,10 +80,12 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         Double temp1 = dbHelper.get_highest();
         Double temp2 = dbHelper.get_avg();
         Double temp3 = dbHelper.get_sum();
-        //While actual calls, remove toasts
-        Toast.makeText(getContext(), temp1.toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), temp2.toString(), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), temp3.toString(), Toast.LENGTH_SHORT).show();
+        SharedPreferences.Editor myEdit = sharedPreferences.edit();
+        myEdit.putFloat("spend", temp3.floatValue());
+        myEdit.putFloat("avg", temp2.floatValue());
+        myEdit.putFloat("highest", temp1.floatValue());
+
+        myEdit.apply();
         notifyItemRemoved(position);
         //Return values of following functions to be made use of
 

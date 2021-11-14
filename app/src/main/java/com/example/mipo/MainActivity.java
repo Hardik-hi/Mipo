@@ -16,27 +16,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Collections;
 import java.util.List;
 
+
 public class MainActivity extends AppCompatActivity implements DialogCloseListener{
-    Button btn_view, btn_budget;
-    TextView tw_avg, tw_highest, tw_comm, tw_avail;
     private FloatingActionButton fab;
     private ExpenseAdapter expenseAdapter;
     private List<ExpenseModel> expenseList;
 
     String percentString, savingMessage;
     int savingColor;
-//    public void openExpensesActivity(){
-//        Intent intent = new Intent(this, ViewExpenses.class);
-//        startActivity(intent);
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +37,37 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         setContentView(R.layout.activity_main);
         expenseAdapter = new ExpenseAdapter(MainActivity.this);
 
+        //start the view expense activity
 
+        Button button1 = findViewById(R.id.viewExpensesButton);
+        button1.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ViewExpenses.class);
+            view.getContext().startActivity(intent);
+        });
+
+        //start the edit device session data and budget activity
+        Button button2 = findViewById(R.id.changeBudgetButton);
+        button2.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, SetSessionParams.class);
+            view.getContext().startActivity(intent);
+        });
+
+        //to add an expense, starts a new fragment
+        fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AddExpense.newInstance().show(getSupportFragmentManager(), AddExpense.TAG);
+            }
+        });
+
+
+
+
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
         //set the variables for budget and other metrics
         SharedPreferences sh = getSharedPreferences("MySharedPref", MODE_PRIVATE);
 
@@ -81,6 +104,8 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 
         //progress bar
         CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.circularProgress);
+        circularProgressBar.setProgress(50);
+        circularProgressBar.setProgressColor(Color.CYAN);
         circularProgressBar.setProgress((int) percent);
         circularProgressBar.setProgressColor(savingColor);
         circularProgressBar.setTextColor(Color.BLACK);
@@ -96,47 +121,9 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         avgMessage.setText(avgSpendMessage);
         highestMessage.setText(highestSpendMessage);
 
-        //start the view expense activity
-        Button button1 = findViewById(R.id.viewExpensesButton);
-        button1.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, ViewExpenses.class);
-            view.getContext().startActivity(intent);
-        });
 
-        //start the edit device session data and budget activity
-        Button button2 = findViewById(R.id.changeBudgetButton);
-        button2.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, SetSessionParams.class);
-            view.getContext().startActivity(intent);
-        });
-
-        //to add an expense, starts a new fragment
-        fab = findViewById(R.id.floatingActionButton);
-
-        btn_budget = (Button) findViewById(R.id.changeBudgetButton);
-
-        btn_budget.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DBHelper dbHelper = new DBHelper(MainActivity.this);
-//                List<ExpenseModel> expenseModelList = dbHelper.viewAll();
-//                Toast.makeText(MainActivity.this, expenseModelList.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddExpense.newInstance().show(getSupportFragmentManager(), AddExpense.TAG);
-            }
-        });
-
-//        btn_view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openExpensesActivity();
-//            }
-//        });
     }
+
     public String convertToNumeral(float num){
         if(num<1000)
             return String.valueOf((int)num);
@@ -153,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
     //to handle closing of the dialog
     @Override
     public void handleDialogClose(DialogInterface dialog){
-       //expenseList = db.getAllTasks();
+        //expenseList = db.getAllTasks();
 
         expenseAdapter.notifyDataSetChanged();
     }

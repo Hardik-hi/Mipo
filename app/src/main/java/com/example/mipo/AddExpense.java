@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -139,6 +140,7 @@ public class AddExpense extends BottomSheetDialogFragment {
         newExpenseMethod = requireView().findViewById(R.id.newExpenseMethod);
         newExpenseDate = requireView().findViewById(R.id.newExpenseDate);
         newExpenseSaveButton = getView().findViewById(R.id.newExpenseButton);
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
 
         boolean isUpdate = false;
 
@@ -202,7 +204,7 @@ public class AddExpense extends BottomSheetDialogFragment {
 
                 if(finalIsUpdate){
                     //id of expense
-                    int id=Integer.parseInt(bundle.getString("id"));
+                    int id=bundle.getInt("id");
 
                     boolean success = dbhelper.edit_record(id, date, person, method, amount, remarks);
                     Toast.makeText(getActivity(), "success="+String.valueOf(success), Toast.LENGTH_SHORT).show();
@@ -231,10 +233,22 @@ public class AddExpense extends BottomSheetDialogFragment {
                 Double temp1 = dbhelper.get_highest();
                 Double temp2 = dbhelper.get_avg();
                 Double temp3 = dbhelper.get_sum();
+
+
+
+
+                // write all data in SharedPreference
+                SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                myEdit.putFloat("spend", temp3.floatValue());
+                myEdit.putFloat("avg", temp2.floatValue());
+                myEdit.putFloat("highest", temp1.floatValue());
+
+                myEdit.apply();
+
                 //While actual calls, remove toasts
-                Toast.makeText(getContext(), temp1.toString(), Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(getContext(), temp1.toString(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(getContext(), temp2.toString(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getContext(), temp3.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), temp3.toString(), Toast.LENGTH_SHORT).show();*/
                 dismiss();
             }
         });
