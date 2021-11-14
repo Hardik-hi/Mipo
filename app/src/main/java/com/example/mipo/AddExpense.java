@@ -144,7 +144,6 @@ public class AddExpense extends BottomSheetDialogFragment {
 
         //DATABASE COMMANDS OPENING AND SETTING CONN
 
-
         final Bundle bundle = getArguments();
         if(bundle != null){
             isUpdate = true;
@@ -173,9 +172,6 @@ public class AddExpense extends BottomSheetDialogFragment {
             newExpenseDate.setText(date);
             assert date != null;
 
-
-
-
             if(amount.length()>0 && person.length()>0)
                 newExpenseSaveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark));
         }
@@ -186,7 +182,7 @@ public class AddExpense extends BottomSheetDialogFragment {
             public void onClick(View v) {
 
                 //amount of expense
-                double amount=-1.0;
+                Double amount=-1.0;
                 amount = Double.parseDouble(newExpenseAmount.getText().toString());
 
                 //name of person
@@ -206,10 +202,10 @@ public class AddExpense extends BottomSheetDialogFragment {
 
                 if(finalIsUpdate){
                     //id of expense
-                    int id=(bundle.getInt("id"));
+                    int id=Integer.parseInt(bundle.getString("id"));
 
                     boolean success = dbhelper.edit_record(id, date, person, method, amount, remarks);
-
+                    Toast.makeText(getActivity(), "success="+String.valueOf(success), Toast.LENGTH_SHORT).show();
                     if(success == true) {
                         Toast.makeText(getActivity(), "Successfully updated record", Toast.LENGTH_SHORT).show();
                     } else Toast.makeText(getActivity(), "Failed to update record", Toast.LENGTH_SHORT).show();

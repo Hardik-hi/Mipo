@@ -51,7 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         long insert = db.insert(EXPENSES, null, cv);
 
-//        db.close();
+        db.close();
         return insert != -1;
     }
 
@@ -78,8 +78,8 @@ public class DBHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
 
-//        cursor.close();
-//        db.close();
+        cursor.close();
+        db.close();
         return expenseModelList;
     }
 
@@ -92,8 +92,12 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
 
         if(cursor.moveToFirst() == true) {
+            cursor.close();
+            db.close();
             return true;
         }
+        cursor.close();
+        db.close();
         return false;
     }
 
@@ -108,6 +112,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(PAYMENT_MODE, payment_mode);
 
         long update = db.update(EXPENSES, cv, "id=?", new String[]{pass});
+        db.close();
         return update != -1;
     }
 
@@ -119,8 +124,12 @@ public class DBHelper extends SQLiteOpenHelper {
         if(cursor.moveToFirst()) {
             String cont = DatabaseUtils.dumpCursorToString(cursor);
             Double max = cursor.getDouble(0);
+            cursor.close();
+            db.close();
             return max;
         }
+        cursor.close();
+        db.close();
         return 0.0;
     }
     public Double get_avg(){
@@ -130,8 +139,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
         if(cursor.moveToFirst()) {
             Double avg = cursor.getDouble(0);
+            cursor.close();
+            db.close();
             return avg;
         }
+        cursor.close();
+        db.close();
         return 0.0;
     }
 
@@ -142,8 +155,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
         if(cursor.moveToFirst()) {
             Double sum = cursor.getDouble(0);
+            cursor.close();
+            db.close();
             return sum;
         }
+        cursor.close();
+        db.close();
         return 0.0;
     }
 }
