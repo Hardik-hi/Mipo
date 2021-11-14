@@ -16,20 +16,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Collections;
 import java.util.List;
 
-
 public class MainActivity extends AppCompatActivity implements DialogCloseListener{
+    Button btn_view, btn_budget;
+    TextView tw_avg, tw_highest, tw_comm, tw_avail;
     private FloatingActionButton fab;
     private ExpenseAdapter expenseAdapter;
     private List<ExpenseModel> expenseList;
 
     String percentString, savingMessage;
     int savingColor;
+//    public void openExpensesActivity(){
+//        Intent intent = new Intent(this, ViewExpenses.class);
+//        startActivity(intent);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,9 +96,6 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         avgMessage.setText(avgSpendMessage);
         highestMessage.setText(highestSpendMessage);
 
-
-
-
         //start the view expense activity
         Button button1 = findViewById(R.id.viewExpensesButton);
         button1.setOnClickListener(view -> {
@@ -108,6 +112,17 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 
         //to add an expense, starts a new fragment
         fab = findViewById(R.id.floatingActionButton);
+
+        btn_budget = (Button) findViewById(R.id.changeBudgetButton);
+
+        btn_budget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper dbHelper = new DBHelper(MainActivity.this);
+//                List<ExpenseModel> expenseModelList = dbHelper.viewAll();
+//                Toast.makeText(MainActivity.this, expenseModelList.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,9 +130,12 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
             }
         });
 
-
-
-
+//        btn_view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openExpensesActivity();
+//            }
+//        });
     }
     public String convertToNumeral(float num){
         if(num<1000)

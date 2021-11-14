@@ -1,27 +1,28 @@
 package com.example.mipo;
 
 public class ExpenseModel {
-    private String date;
-    private String payment_mode;
-    private String person;
-    private Double amount;
-    private String remark;
     private int id;
+    private String date;
+    private String person;
+    private String payment_mode;
+    private Double amount;
+    private String remarks;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public ExpenseModel(String date, String person, String payment_mode, Double amount, String remark) {
+    public ExpenseModel(String date, String person, String payment_mode, Double amount, String remarks) {
         this.date = date;
-        this.amount = amount;
-        this.remark = remark;
-        this.payment_mode = payment_mode;
         this.person = person;
+        this.payment_mode = payment_mode;
+        this.amount = amount;
+        this.remarks = remarks;
+    }
+
+    public ExpenseModel(int id, String date, String person, String payment_mode, Double amount, String remarks) {
+        this.id = id;
+        this.date = date;
+        this.person = person;
+        this.payment_mode = payment_mode;
+        this.amount = amount;
+        this.remarks = remarks;
     }
 
     @Override
@@ -30,9 +31,18 @@ public class ExpenseModel {
                 "date = " + date +
                 ", details = " + person +
                 ", payment_mode = " + payment_mode +
-                ", remark = " + remark +
+                ", remarks = " + remarks +
                 "}";
     }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getDate() {
         return date;
     }
@@ -49,12 +59,12 @@ public class ExpenseModel {
         this.amount = amount;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     public String getPayment_mode() {

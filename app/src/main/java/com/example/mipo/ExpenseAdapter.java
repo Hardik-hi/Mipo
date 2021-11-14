@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,7 +46,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         final ExpenseModel item = expenseList.get(position);
         holder.amount.setText(item.getAmount().toString());
         holder.personAndDate.setText(item.getPerson()+" | "+item.getDate());
-        holder.remarks.setText(item.getRemark());
+        holder.remarks.setText(item.getRemarks());
     }
 
     private boolean toBoolean(int n) {
@@ -70,10 +71,20 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
     public void deleteItem(int position) {
         ExpenseModel item = expenseList.get(position);
-
-        //db.deleteTask(item.getId());
-        expenseList.remove(position);
+        DBHelper dbHelper = new DBHelper(getContext());
+        dbHelper.delete_record(item);
+//        expenseList.remove(position);
+        Toast.makeText(getContext(), "Successfully deleted record", Toast.LENGTH_SHORT).show();
+        Double temp1 = dbHelper.get_highest();
+        Double temp2 = dbHelper.get_avg();
+        Double temp3 = dbHelper.get_sum();
+        //While actual calls, remove toasts
+        Toast.makeText(getContext(), temp1.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), temp2.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), temp3.toString(), Toast.LENGTH_SHORT).show();
         notifyItemRemoved(position);
+        //Return values of following functions to be made use of
+
     }
 
     public void editItem(int position) {
@@ -85,7 +96,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         bundle.putString("remarks", item.getPerson());
         bundle.putString("method", item.getPayment_mode());
         bundle.putString("date",item.getDate());
-
 
         AddExpense fragment = new AddExpense();
         fragment.setArguments(bundle);

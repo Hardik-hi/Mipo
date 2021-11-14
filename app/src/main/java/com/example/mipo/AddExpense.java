@@ -184,8 +184,6 @@ public class AddExpense extends BottomSheetDialogFragment {
         newExpenseSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //id of expense
-                int id=(bundle.getInt("id"));
 
                 //amount of expense
                 double amount=-1.0;
@@ -201,23 +199,46 @@ public class AddExpense extends BottomSheetDialogFragment {
                 String date=newExpenseDate.getText().toString();
 
                 //method of expense
-                String method=newExpenseMethod.getSelectedItem().toString();;
+                String method=newExpenseMethod.getSelectedItem().toString();
+                ExpenseModel expenseModel;
+                DBHelper dbhelper = new DBHelper(getActivity());
 
 
                 if(finalIsUpdate){
-                    //update the db entry
-                    //db.updateTask(bundle.getInt("id"), text);
+                    //id of expense
+                    int id=(bundle.getInt("id"));
 
-                    Toast.makeText(getActivity(),"Entry updated successfully!",Toast.LENGTH_SHORT).show();
+                    boolean success = dbhelper.edit_record(id, date, person, method, amount, remarks);
+
+                    if(success == true) {
+                        Toast.makeText(getActivity(), "Successfully updated record", Toast.LENGTH_SHORT).show();
+                    } else Toast.makeText(getActivity(), "Failed to update record", Toast.LENGTH_SHORT).show();
+
                 }
                 else {
-                    //create a new expense and add it to the db
-                    /* ToDoModel task = new ToDoModel();
-                    task.setTask(text);
-                    task.setStatus(0);
-                    db.insertTask(task);*/
-                    Toast.makeText(getActivity(),"Entry added successfully!",Toast.LENGTH_SHORT).show();
+                    try{
+                        expenseModel = new ExpenseModel(date, person, method, amount, remarks);
+                        Toast.makeText(getActivity(), "Successfully created new record", Toast.LENGTH_SHORT).show();
+                    }
+                    catch(Exception e){
+                        Toast.makeText(getActivity(), "Failed to create new record", Toast.LENGTH_SHORT).show();
+                        expenseModel = new ExpenseModel("null", "none", "null", -1.0, "invalid");
+                    }
+
+                    boolean success = dbhelper.add_data(expenseModel);
+
+                    if(success == true) {
+                        Toast.makeText(getActivity(), "Successfully added transaction", Toast.LENGTH_SHORT).show();
+                    } else Toast.makeText(getActivity(), "Failed to add transaction", Toast.LENGTH_SHORT).show();
                 }
+                //Return values of following functions to be made use of
+                Double temp1 = dbhelper.get_highest();
+                Double temp2 = dbhelper.get_avg();
+                Double temp3 = dbhelper.get_sum();
+                //While actual calls, remove toasts
+                Toast.makeText(getContext(), temp1.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), temp2.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), temp3.toString(), Toast.LENGTH_SHORT).show();
                 dismiss();
             }
         });
