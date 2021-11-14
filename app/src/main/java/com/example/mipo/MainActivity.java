@@ -19,7 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements DialogCloseListener {
+public class MainActivity extends AppCompatActivity{
     Button btn_view, btn_budget;
     TextView tw_avg, tw_highest, tw_comm, tw_avail;
     private FloatingActionButton fab;
@@ -40,15 +40,13 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         circularProgressBar.setProgressColor(Color.CYAN);
         circularProgressBar.setTextColor(Color.BLACK);
 
-
-
         //start the view expense activity
 
-        Button button1 = findViewById(R.id.viewExpensesButton);
-        button1.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, ViewExpenses.class);
-            view.getContext().startActivity(intent);
-        });
+//        Button button1 = findViewById(R.id.viewExpensesButton);
+//        button1.setOnClickListener(view -> {
+//            Intent intent = new Intent(MainActivity.this, ViewExpenses.class);
+//            view.getContext().startActivity(intent);
+//        });
 
         //to add an expense, starts a new fragment
         btn_view = (Button) findViewById(R.id.viewExpensesButton);
@@ -57,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         tw_comm = (TextView) findViewById(R.id.textView);
         tw_avail = (TextView) findViewById(R.id.textView2);
         fab = findViewById(R.id.floatingActionButton);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,18 +63,6 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
             }
         });
 
-
-
-
-    }
-
-    //to handle closing of the dialog
-    @Override
-    public void handleDialogClose(DialogInterface dialog){
-       /* expenseList = db.getAllTasks();
-        Collections.reverse(taskList);
-        expenseAdapter.setExpenseList(expenseList);
-        expenseAdapter.notifyDataSetChanged();*/
         btn_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,4 +70,14 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
             }
         });
     }
+
+    //to handle closing of the dialog
+//    @Override
+//    public void handleDialogClose(DialogInterface dialog){
+//       /* expenseList = db.getAllTasks();
+//        Collections.reverse(taskList);
+//        expenseAdapter.setExpenseList(expenseList);
+//        expenseAdapter.notifyDataSetChanged();*/
+//
+//    }
 }

@@ -43,7 +43,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         final ExpenseModel item = expenseList.get(position);
         holder.amount.setText(item.getAmount().toString());
         holder.personAndDate.setText(item.getPerson()+" | "+item.getDate());
-        holder.remarks.setText(item.getRemark());
+        holder.remarks.setText(item.getRemarks());
     }
 
     private boolean toBoolean(int n) {

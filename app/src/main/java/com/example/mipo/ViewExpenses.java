@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class ViewExpenses extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_expenses);
 
+        expenseList = new ArrayList<>();
         expenseRecyclerView = findViewById(R.id.expenseRecyclerView);
         expenseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         expenseAdapter = new ExpenseAdapter(ViewExpenses.this);
@@ -33,7 +35,6 @@ public class ViewExpenses extends AppCompatActivity {
 
         //for testing
         ExpenseModel exp=new ExpenseModel("10/11/21","hardik","upi",30.0,"wow");
-
         expenseList.add(exp);
         expenseList.add(exp);
         expenseList.add(exp);

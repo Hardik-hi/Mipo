@@ -12,21 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final String TRANSACTIONS = "TRANSACTIONS";
+    public static final String EXPENSES = "EXPENSES";
     public static final String ID = "id";
     public static final String DATE = "date";
-    public static final String DETAILS = "details";
+    public static final String PERSON = "person";
     public static final String PAYMENT_MODE = "payment_mode";
     public static final String AMOUNT = "amount";
     public static final String REMARKS = "remarks";
 
     public DBHelper(Context context) {
-        super(context, TRANSACTIONS + ".db", null, 1);
+        super(context, EXPENSES + ".db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String query = "CREATE TABLE " + TRANSACTIONS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DATE + " DATE, " + DETAILS + " TEXT, " + PAYMENT_MODE + " TEXT, " + AMOUNT + " DOUBLE, " + REMARKS + " TEXT)";
+        String query = "CREATE TABLE " + EXPENSES + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + DATE + " DATE, " + PERSON + " TEXT, " + PAYMENT_MODE + " TEXT, " + AMOUNT + " DOUBLE, " + REMARKS + " TEXT)";
         db.execSQL(query);
     }
 
@@ -35,26 +35,26 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public boolean add_data(TransactionModel transactionModel){
+    public boolean add_data(ExpenseModel expenseModel){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(AMOUNT, transactionModel.getAmount());
-        cv.put(DETAILS, transactionModel.getDetail());
-        cv.put(DATE, transactionModel.getDate());
-        cv.put(REMARKS, transactionModel.getRemarks());
-        cv.put(PAYMENT_MODE, transactionModel.getPayment_mode());
+        cv.put(AMOUNT, expenseModel.getAmount());
+        cv.put(PERSON, expenseModel.getPerson());
+        cv.put(DATE, expenseModel.getDate());
+        cv.put(REMARKS, expenseModel.getRemarks());
+        cv.put(PAYMENT_MODE, expenseModel.getPayment_mode());
 
-        long insert = db.insert(TRANSACTIONS, null, cv);
+        long insert = db.insert(EXPENSES, null, cv);
 
         db.close();
         return insert != -1;
     }
 
-    public List<TransactionModel> viewAll(){
-        List<TransactionModel> transactionModelList = new ArrayList<>();
+    public List<ExpenseModel> viewAll(){
+        List<ExpenseModel> expenseModelList = new ArrayList<>();
         // get data from database
-        String query = "SELECT * FROM " + TRANSACTIONS;
+        String query = "SELECT * FROM " + EXPENSES;
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -68,20 +68,20 @@ public class DBHelper extends SQLiteOpenHelper {
             Double amount = cursor.getDouble(4);
             String remarks = cursor.getString(5);
 
-            TransactionModel transactionModel = new TransactionModel(id, date, detail, payment_mode, amount, remarks);
-            transactionModelList.add(transactionModel);
+            ExpenseModel expenseModel = new ExpenseModel(id, date, detail, payment_mode, amount, remarks);
+            expenseModelList.add(expenseModel);
         } while (cursor.moveToFirst());
 
         cursor.close();
         db.close();
-        return transactionModelList;
+        return expenseModelList;
     }
 
-    public boolean delete_record(TransactionModel transactionModel){
+    public boolean delete_record(ExpenseModel expenseModel){
         //find the record from the db. If found, delete, else return false
 
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "DELETE FROM " + TRANSACTIONS + " WHERE " + ID + "=" + transactionModel.getId();
+        String query = "DELETE FROM " + EXPENSES + " WHERE " + ID + "=" + expenseModel.getId();
 
         Cursor cursor = db.rawQuery(query, null);
 
