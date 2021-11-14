@@ -38,8 +38,6 @@ import java.util.Calendar;
 import java.util.Objects;
 
 
-//import com.example.mipo.DatePickerFragment;
-
 public class AddExpense extends BottomSheetDialogFragment {
 
     public static final String TAG="ActionBottomDialog";
@@ -145,6 +143,7 @@ public class AddExpense extends BottomSheetDialogFragment {
 
         //DATABASE COMMANDS OPENING AND SETTING CONN
 
+
         final Bundle bundle = getArguments();
         if(bundle != null){
             isUpdate = true;
@@ -177,13 +176,14 @@ public class AddExpense extends BottomSheetDialogFragment {
                 newExpenseSaveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark));
         }
 
+
         final boolean finalIsUpdate = isUpdate;
         newExpenseSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //amount of expense
-                Double amount = Double.parseDouble(bundle.getString("amount").toString());
+                Float amount = Float.parseFloat(bundle.getString("amount").toString());
 
                 //name of person
                 String person=newExpensePerson.getText().toString();
@@ -207,28 +207,14 @@ public class AddExpense extends BottomSheetDialogFragment {
                     task.setTask(text);
                     task.setStatus(0);
                     db.insertTask(task);*/
-                    TransactionModel transactionModel;
-                    try{
-                        transactionModel = new TransactionModel(date, person, method, amount, remarks);
-                        Toast.makeText(getActivity(), "Successfully created new transaction", Toast.LENGTH_SHORT).show();
-                    }
-                    catch(Exception e){
-                        Toast.makeText(getActivity(), "Error creating transaction", Toast.LENGTH_SHORT).show();
-                        transactionModel = new TransactionModel("null", "none", "null", -1.0, "invalid");
-                    }
 
-                    DBHelper dbhelper = new DBHelper(getActivity());
-
-                    boolean success = dbhelper.add_data(transactionModel);
-
-                    if(success == true) {
-                        Toast.makeText(getActivity(), "Successfully added transaction", Toast.LENGTH_SHORT).show();
-                    } else Toast.makeText(getActivity(), "Failed to add transaction", Toast.LENGTH_SHORT).show();
                 }
                 dismiss();
             }
         });
     }
+
+
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog){
