@@ -8,6 +8,14 @@ public class TransactionModel {
     private Double amount;
     private String remarks;
 
+    public TransactionModel(String date, String detail, String payment_mode, Double amount, String remarks) {
+        this.date = date;
+        this.detail = detail;
+        this.payment_mode = payment_mode;
+        this.amount = amount;
+        this.remarks = remarks;
+    }
+
     public TransactionModel(int id, String date, String detail, String payment_mode, Double amount, String remarks) {
         this.id = id;
         this.date = date;
