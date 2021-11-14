@@ -184,6 +184,8 @@ public class AddExpense extends BottomSheetDialogFragment {
         newExpenseSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //id of expense
+                int id=Integer.parseInt(bundle.getString("id"));
 
                 //amount of expense
                 double amount=-1.0;

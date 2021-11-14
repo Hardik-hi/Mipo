@@ -17,15 +17,15 @@
         android:layout_marginTop="25dp" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/savingMessage"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="272dp"
-        android:layout_marginEnd="119dp"
-        android:text="Excellent!"
+        android:layout_marginTop="275dp"
+
+        android:text="Fabulous!X"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#000000"
@@ -33,7 +33,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/savingLeftMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -82,10 +82,10 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="62dp"
-        android:text="Button" />
+        android:text="Edit budget" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/avgMessage"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -95,10 +95,11 @@
         android:text="2.5K"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/highestMessage"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -108,7 +109,8 @@
         android:text="1.2K"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textStyle="bold"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
