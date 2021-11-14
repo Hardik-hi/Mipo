@@ -249,7 +249,10 @@ public class AddExpense extends BottomSheetDialogFragment {
                 /*Toast.makeText(getContext(), temp1.toString(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(getContext(), temp2.toString(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(getContext(), temp3.toString(), Toast.LENGTH_SHORT).show();*/
+                Activity activity=getActivity();
+
                 dismiss();
+                activity.recreate();
             }
         });
     }
@@ -259,6 +262,7 @@ public class AddExpense extends BottomSheetDialogFragment {
     @Override
     public void onDismiss(@NonNull DialogInterface dialog){
         Activity activity = getActivity();
+
         if(activity instanceof DialogCloseListener)
             ((DialogCloseListener)activity).handleDialogClose(dialog);
     }
