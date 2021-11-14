@@ -35,10 +35,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Calendar;
-import java.util.Objects;
 
-
-import com.example.mipo.DatePickerFragment;
 
 public class AddExpense extends BottomSheetDialogFragment {
 
@@ -151,7 +148,7 @@ public class AddExpense extends BottomSheetDialogFragment {
             isUpdate = true;
 
             //setting the amount
-            String amount = Float.toString(bundle.getFloat("amount"));
+            String amount = Double.toString(bundle.getDouble("amount"));
             newExpenseAmount.setText(amount);
             assert amount != null;
 
@@ -174,7 +171,7 @@ public class AddExpense extends BottomSheetDialogFragment {
             newExpenseDate.setText(date);
             assert date != null;
 
-            if(amount.length()>0 && person.length()>0 && date.length()>0)
+            if(amount.length()>0 && person.length()>0)
                 newExpenseSaveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark));
         }
 
@@ -209,7 +206,7 @@ public class AddExpense extends BottomSheetDialogFragment {
                     task.setTask(text);
                     task.setStatus(0);
                     db.insertTask(task);*/
-
+                    Toast.makeText(getActivity(),"Entry added successfully!",Toast.LENGTH_SHORT).show();
                 }
                 dismiss();
             }
