@@ -230,6 +230,7 @@ public class AddExpense extends BottomSheetDialogFragment {
                 //Return values of following functions to be made use of
                 dbhelper.get_highest();
                 dbhelper.get_avg();
+                dbhelper.get_sum();
                 dismiss();
             }
         });

@@ -122,4 +122,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return avg;
     }
 
+    public Double get_sum(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT SUM(" + AMOUNT + ") FROM " + EXPENSES;
+        Cursor cursor = db.rawQuery(query, null);
+        Double sum = cursor.getDouble(0);
+        return sum;
+    }
 }

@@ -79,6 +79,7 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         //Return values of following functions to be made use of
         dbHelper.get_highest();
         dbHelper.get_avg();
+        dbHelper.get_sum();
     }
 
     public void editItem(int position) {
