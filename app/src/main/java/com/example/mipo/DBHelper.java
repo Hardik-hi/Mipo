@@ -106,4 +106,20 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    public Double get_highest(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT MAX(" + AMOUNT + ") FROM " + EXPENSES;
+        Cursor cursor = db.rawQuery(query, null);
+        Double max = cursor.getDouble(0);
+        return max;
+    }
+    public Double get_avg(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT AVG(" + AMOUNT + ") FROM " + EXPENSES;
+        Cursor cursor = db.rawQuery(query, null);
+        Double avg = cursor.getDouble(0);
+        return avg;
+    }
+
 }
