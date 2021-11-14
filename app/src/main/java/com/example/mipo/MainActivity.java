@@ -1,20 +1,33 @@
 package com.example.mipo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Collections;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements DialogCloseListener {
     private FloatingActionButton fab;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         //progress bar
         CircularProgressBar circularProgressBar = (CircularProgressBar) findViewById(R.id.circularProgress);
@@ -22,6 +35,17 @@ public class MainActivity extends AppCompatActivity {
         circularProgressBar.setProgressColor(Color.CYAN);
         circularProgressBar.setTextColor(Color.BLACK);
 
+
+
+        //start the view expense activity
+
+        Button button1 = findViewById(R.id.viewExpensesButton);
+        button1.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ViewExpenses.class);
+            view.getContext().startActivity(intent);
+        });
+
+        //to add an expense, starts a new fragment
         fab = findViewById(R.id.floatingActionButton);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,5 +57,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    //to handle closing of the dialog
+    @Override
+    public void handleDialogClose(DialogInterface dialog){
+       /* expenseList = db.getAllTasks();
+        Collections.reverse(taskList);
+        expenseAdapter.setExpenseList(expenseList);
+        expenseAdapter.notifyDataSetChanged();*/
     }
 }
