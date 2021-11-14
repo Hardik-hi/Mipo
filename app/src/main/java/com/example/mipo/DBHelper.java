@@ -99,13 +99,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean edit_record(int id, String date, String person, String payment_mode, Double amount, String remarks){
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + EXPENSES + "SET date= " + date + ", person= " + person + ", payment_mode= " + payment_mode + ", amount= " + amount + ", remarks= " + remarks + "WHERE id= " + id;
+        ContentValues cv = new ContentValues();
+        String pass = String.valueOf(id);
+        cv.put(AMOUNT, amount);
+        cv.put(PERSON, person);
+        cv.put(DATE, date);
+        cv.put(REMARKS, remarks);
+        cv.put(PAYMENT_MODE, payment_mode);
 
-        Cursor cursor = db.rawQuery(query, null);
-        if(cursor.moveToFirst() == true){
-            return true;
-        }
-        return false;
+        long update = db.update(EXPENSES, cv, "id=?", new String[]{pass});
+        return update != -1;
     }
 
     public Double get_highest(){
