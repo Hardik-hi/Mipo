@@ -1,7 +1,11 @@
 package com.example.mipo;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,7 +16,10 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.Collections;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity implements DialogCloseListener {
     Button btn_view, btn_budget;
     TextView tw_avg, tw_highest, tw_comm, tw_avail;
     private FloatingActionButton fab;
@@ -33,6 +40,17 @@ public class MainActivity extends AppCompatActivity {
         circularProgressBar.setProgressColor(Color.CYAN);
         circularProgressBar.setTextColor(Color.BLACK);
 
+
+
+        //start the view expense activity
+
+        Button button1 = findViewById(R.id.viewExpensesButton);
+        button1.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ViewExpenses.class);
+            view.getContext().startActivity(intent);
+        });
+
+        //to add an expense, starts a new fragment
         btn_view = (Button) findViewById(R.id.viewExpensesButton);
         tw_avg = (TextView)findViewById(R.id.textView3);
         tw_highest = (TextView) findViewById(R.id.textView4);
@@ -45,6 +63,19 @@ public class MainActivity extends AppCompatActivity {
                 AddExpense.newInstance().show(getSupportFragmentManager(), AddExpense.TAG);
             }
         });
+
+
+
+
+    }
+
+    //to handle closing of the dialog
+    @Override
+    public void handleDialogClose(DialogInterface dialog){
+       /* expenseList = db.getAllTasks();
+        Collections.reverse(taskList);
+        expenseAdapter.setExpenseList(expenseList);
+        expenseAdapter.notifyDataSetChanged();*/
         btn_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
