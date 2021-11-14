@@ -47,9 +47,8 @@ public class ViewExpenses extends AppCompatActivity implements DialogCloseListen
 
         expenseAdapter.setExpenseList(expenseList);
 
-//        DBHelper dbHelper = new DBHelper(ViewExpenses.this);
-//        List<ExpenseModel> expenseModelList = dbHelper.viewAll();
-//        Toast.makeText(ViewExpenses.this, expenseModelList.toString(), Toast.LENGTH_SHORT).show();
+        DBHelper dbHelper = new DBHelper(ViewExpenses.this);
+        List<ExpenseModel> expenseModelList = dbHelper.viewAll();
     }
 
     //to handle closing of the dialog

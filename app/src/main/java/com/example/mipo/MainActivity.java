@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -59,6 +60,17 @@ public class MainActivity extends AppCompatActivity{
         tw_comm = (TextView) findViewById(R.id.textView);
         tw_avail = (TextView) findViewById(R.id.textView2);
         fab = findViewById(R.id.floatingActionButton);
+
+        btn_budget = (Button) findViewById(R.id.changeBudgetButton);
+
+        btn_budget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper dbHelper = new DBHelper(MainActivity.this);
+//                List<ExpenseModel> expenseModelList = dbHelper.viewAll();
+//                Toast.makeText(MainActivity.this, expenseModelList.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

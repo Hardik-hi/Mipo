@@ -50,7 +50,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         long insert = db.insert(EXPENSES, null, cv);
 
-        db.close();
+//        db.close();
         return insert != -1;
     }
 
@@ -63,17 +63,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, null);
         // loop through the cursor and create new Transaction object for each of the result.
-        if(cursor.moveToFirst()) do {
-            int id = cursor.getInt(0);
-            String date = cursor.getString(1);
-            String payment_mode = cursor.getString(2);
-            String detail = cursor.getString(3);
-            Double amount = cursor.getDouble(4);
-            String remarks = cursor.getString(5);
+        if(cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String date = cursor.getString(1);
+                String payment_mode = cursor.getString(2);
+                String detail = cursor.getString(3);
+                Double amount = cursor.getDouble(4);
+                String remarks = cursor.getString(5);
 
-            ExpenseModel expenseModel = new ExpenseModel(id, date, detail, payment_mode, amount, remarks);
-            expenseModelList.add(expenseModel);
-        } while (cursor.moveToFirst());
+                ExpenseModel expenseModel = new ExpenseModel(id, date, detail, payment_mode, amount, remarks);
+                expenseModelList.add(expenseModel);
+            } while (cursor.moveToNext());
+        }
 
         cursor.close();
         db.close();
