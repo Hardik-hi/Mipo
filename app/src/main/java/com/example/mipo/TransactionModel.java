@@ -1,18 +1,20 @@
 package com.example.mipo;
 
 public class TransactionModel {
+    private int id;
     private String date;
-    private String payment_mode;
     private String detail;
+    private String payment_mode;
     private Double amount;
-    private String remark;
+    private String remarks;
 
-    public TransactionModel(String date, String detail, String payment_mode, Double amount, String remark) {
+    public TransactionModel(int id, String date, String detail, String payment_mode, Double amount, String remarks) {
+        this.id = id;
         this.date = date;
-        this.amount = amount;
-        this.remark = remark;
-        this.payment_mode = payment_mode;
         this.detail = detail;
+        this.payment_mode = payment_mode;
+        this.amount = amount;
+        this.remarks = remarks;
     }
 
     @Override
@@ -21,7 +23,7 @@ public class TransactionModel {
                 "date = " + date +
                 ", details = " + detail +
                 ", payment_mode = " + payment_mode +
-                ", remark = " + remark +
+                ", remarks = " + remarks +
                 "}";
     }
     public String getDate() {
@@ -40,12 +42,20 @@ public class TransactionModel {
         this.amount = amount;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPayment_mode() {
