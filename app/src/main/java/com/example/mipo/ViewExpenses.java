@@ -16,7 +16,7 @@ public class ViewExpenses extends AppCompatActivity implements DialogCloseListen
 
     //private DatabaseHandler db;
     private RecyclerView expenseRecyclerView;
-    public static ExpenseAdapter expenseAdapter;
+    private ExpenseAdapter expenseAdapter;
     private List<ExpenseModel> expenseList;
 
 

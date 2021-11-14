@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 
 public class AddExpense extends BottomSheetDialogFragment {
@@ -171,10 +173,12 @@ public class AddExpense extends BottomSheetDialogFragment {
             newExpenseDate.setText(date);
             assert date != null;
 
+
+
+
             if(amount.length()>0 && person.length()>0)
                 newExpenseSaveButton.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark));
         }
-
 
         final boolean finalIsUpdate = isUpdate;
         newExpenseSaveButton.setOnClickListener(new View.OnClickListener() {
@@ -182,7 +186,8 @@ public class AddExpense extends BottomSheetDialogFragment {
             public void onClick(View v) {
 
                 //amount of expense
-                double amount = Double.parseDouble(newExpenseAmount.getText().toString());
+                double amount=-1.0;
+                amount = Double.parseDouble(newExpenseAmount.getText().toString());
 
                 //name of person
                 String person=newExpensePerson.getText().toString();
@@ -196,10 +201,12 @@ public class AddExpense extends BottomSheetDialogFragment {
                 //method of expense
                 String method=newExpenseMethod.getSelectedItem().toString();;
 
+
                 if(finalIsUpdate){
                     //update the db entry
                     //db.updateTask(bundle.getInt("id"), text);
-                    Toast.makeText(getActivity(),"Entry updts successfully!",Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(getActivity(),"Entry updated successfully!",Toast.LENGTH_SHORT).show();
                 }
                 else {
                     //create a new expense and add it to the db

@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
@@ -21,9 +22,9 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
     private List<ExpenseModel> expenseList=new ArrayList<>();
     //private DatabaseHandler db;
-    private ViewExpenses activity;
+    private AppCompatActivity activity;
 
-    public ExpenseAdapter(ViewExpenses activity) {
+    public ExpenseAdapter(AppCompatActivity activity) {
         //this.db = db;
         this.activity = activity;
     }

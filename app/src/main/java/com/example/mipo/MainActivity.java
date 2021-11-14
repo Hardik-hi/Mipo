@@ -1,5 +1,8 @@
 package com.example.mipo;
 
+//import static com.example.mipo.ViewExpenses.expenseAdapter;
+//import static com.example.mipo.ViewExpenses.expenseList;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,16 +20,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity{
-    private FloatingActionButton fab;
 
+public class MainActivity extends AppCompatActivity implements DialogCloseListener{
+    private FloatingActionButton fab;
+    private ExpenseAdapter expenseAdapter;
+    private List<ExpenseModel> expenseList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        expenseAdapter = new ExpenseAdapter(MainActivity.this);
 
 
         //progress bar
@@ -60,11 +65,10 @@ public class MainActivity extends AppCompatActivity{
     }
 
     //to handle closing of the dialog
-    /*@Override
+    @Override
     public void handleDialogClose(DialogInterface dialog){
-       expenseList = db.getAllTasks();
-        Collections.reverse(taskList);
-        expenseAdapter.setExpenseList(expenseList);
+       //expenseList = db.getAllTasks();
+
         expenseAdapter.notifyDataSetChanged();
-    }*/
+    }
 }
