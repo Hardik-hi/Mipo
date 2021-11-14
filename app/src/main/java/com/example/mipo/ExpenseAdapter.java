@@ -19,11 +19,11 @@ import java.util.List;
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHolder> {
 
     private List<ExpenseModel> expenseList;
-    private DatabaseHandler db;
+    //private DatabaseHandler db;
     private ViewExpenses activity;
 
-    public ExpenseAdapter(DatabaseHandler db, ViewExpenses activity) {
-        this.db = db;
+    public ExpenseAdapter(ViewExpenses activity) {
+        //this.db = db;
         this.activity = activity;
     }
 

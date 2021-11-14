@@ -12,9 +12,9 @@ import java.util.List;
 
 public class ViewExpenses extends AppCompatActivity {
 
-    private DatabaseHandler db;
+    //private DatabaseHandler db;
     private RecyclerView expenseRecyclerView;
-    private ExpenseAdapter expenseAdapter;
+    public static ExpenseAdapter expenseAdapter;
     private List<ExpenseModel> expenseList;
 
 
@@ -25,14 +25,22 @@ public class ViewExpenses extends AppCompatActivity {
 
         expenseRecyclerView = findViewById(R.id.expenseRecyclerView);
         expenseRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        expenseAdapter = new ExpenseAdapter(db,ViewExpenses.this);
+        expenseAdapter = new ExpenseAdapter(ViewExpenses.this);
         expenseRecyclerView.setAdapter(expenseAdapter);
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(expenseAdapter));
         itemTouchHelper.attachToRecyclerView(expenseRecyclerView);
 
-        expenseList = db.getAllTasks();
-        Collections.reverse(expenseList);
+        //for testing
+        ExpenseModel exp=new ExpenseModel("10/11/21","hardik","upi",30.0,"wow");
+
+        expenseList.add(exp);
+        expenseList.add(exp);
+        expenseList.add(exp);
+        expenseList.add(exp);
+
+        //expenseList = db.getAllTasks();
+        //Collections.reverse(expenseList);
 
         expenseAdapter.setExpenseList(expenseList);
     }
