@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -69,10 +70,13 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
     public void deleteItem(int position) {
         ExpenseModel item = expenseList.get(position);
-
-        //db.deleteTask(item.getId());
-        expenseList.remove(position);
+//        Toast.makeText(getContext(), item.toString(), Toast.LENGTH_SHORT).show();
+        DBHelper dbHelper = new DBHelper(getContext());
+        dbHelper.delete_record(item);
+//        expenseList.remove(position);
+        Toast.makeText(getContext(), "Successfully deleted record", Toast.LENGTH_SHORT).show();
         notifyItemRemoved(position);
+
     }
 
     public void editItem(int position) {
@@ -84,7 +88,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
         bundle.putString("remarks", item.getPerson());
         bundle.putString("method", item.getPayment_mode());
         bundle.putString("date",item.getDate());
-
 
         AddExpense fragment = new AddExpense();
         fragment.setArguments(bundle);

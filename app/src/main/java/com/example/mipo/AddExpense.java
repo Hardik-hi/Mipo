@@ -142,7 +142,6 @@ public class AddExpense extends BottomSheetDialogFragment {
 
         //DATABASE COMMANDS OPENING AND SETTING CONN
 
-
         final Bundle bundle = getArguments();
         if(bundle != null){
             isUpdate = true;
@@ -194,29 +193,30 @@ public class AddExpense extends BottomSheetDialogFragment {
                 String date=newExpenseDate.getText().toString();
 
                 //method of expense
-                String method=newExpenseMethod.getSelectedItem().toString();;
+                String method=newExpenseMethod.getSelectedItem().toString();
+                ExpenseModel expenseModel;
+                DBHelper dbhelper = new DBHelper(getActivity());
 
                 if(finalIsUpdate){
-                    //update the db entry
-                    //db.updateTask(bundle.getInt("id"), text);
+                    //id of expense
+                    int id=Integer.parseInt(bundle.getString("id"));
+
+                    boolean success = dbhelper.edit_record(id, date, person, method, amount, remarks);
+
+                    if(success == true) {
+                        Toast.makeText(getActivity(), "Successfully updated record", Toast.LENGTH_SHORT).show();
+                    } else Toast.makeText(getActivity(), "Failed to update record", Toast.LENGTH_SHORT).show();
+
                 }
                 else {
-                    //create a new expense and add it to the db
-                    /* ToDoModel task = new ToDoModel();
-                    task.setTask(text);
-                    task.setStatus(0);
-                    db.insertTask(task);*/
-                    ExpenseModel expenseModel;
                     try{
                         expenseModel = new ExpenseModel(date, person, method, amount, remarks);
-                        Toast.makeText(getActivity(), "Successfully created new transaction", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Successfully created new record", Toast.LENGTH_SHORT).show();
                     }
                     catch(Exception e){
-                        Toast.makeText(getActivity(), "Error creating transaction", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Failed to create new record", Toast.LENGTH_SHORT).show();
                         expenseModel = new ExpenseModel("null", "none", "null", -1.0, "invalid");
                     }
-
-                    DBHelper dbhelper = new DBHelper(getActivity());
 
                     boolean success = dbhelper.add_data(expenseModel);
 

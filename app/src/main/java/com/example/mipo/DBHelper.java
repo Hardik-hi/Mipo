@@ -95,4 +95,15 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    public boolean edit_record(int id, String date, String person, String payment_mode, Double amount, String remarks){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + EXPENSES + "SET date= " + date + ", person= " + person + ", payment_mode= " + payment_mode + ", amount= " + amount + ", remarks= " + remarks + "WHERE id= " + id;
+
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst() == true){
+            return true;
+        }
+        return false;
+    }
 }
