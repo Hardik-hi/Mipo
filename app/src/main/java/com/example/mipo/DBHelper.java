@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final String EXPENSES = "EXPENSES";
+    public static final String EXPENSES = "expenses";
     public static final String ID = "id";
     public static final String DATE = "date";
     public static final String PERSON = "person";
@@ -20,8 +21,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String AMOUNT = "amount";
     public static final String REMARKS = "remarks";
 
-    public DBHelper(Context context) {
+    public DBHelper(@Nullable Context context) {
         super(context, EXPENSES + ".db", null, 1);
+//        Toast.makeText(context, "Created Database", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -32,7 +34,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS " + EXPENSES);
+        onCreate(db);
     }
 
     public boolean add_data(ExpenseModel expenseModel){

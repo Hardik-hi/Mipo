@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,8 +47,9 @@ public class ViewExpenses extends AppCompatActivity implements DialogCloseListen
 
         expenseAdapter.setExpenseList(expenseList);
 
-        DBHelper dbHelper = new DBHelper(ViewExpenses.this);
-
+//        DBHelper dbHelper = new DBHelper(ViewExpenses.this);
+//        List<ExpenseModel> expenseModelList = dbHelper.viewAll();
+//        Toast.makeText(ViewExpenses.this, expenseModelList.toString(), Toast.LENGTH_SHORT).show();
     }
 
     //to handle closing of the dialog
