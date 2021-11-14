@@ -182,7 +182,7 @@ public class AddExpense extends BottomSheetDialogFragment {
             public void onClick(View v) {
 
                 //amount of expense
-                Float amount = Float.parseFloat(bundle.getString("amount").toString());
+                double amount = Double.parseDouble(bundle.getString("amount").toString());
 
                 //name of person
                 String person=newExpensePerson.getText().toString();
