@@ -14,7 +14,7 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/expenseAmount"
+            android:id="@+id/expenseAmountTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -25,10 +25,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/expensePerson"
+            android:id="@+id/expensePersonTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/expenseAmount"
+            android:layout_below="@+id/expenseAmountTitle"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="90dp"
             android:text="Shikhhar Siingh | 20 Jan 21"
@@ -36,10 +36,10 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/expenseRemark"
+            android:id="@+id/expenseRemarkTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/expensePerson"
+            android:layout_below="@+id/expensePersonTitle"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="90dp"
             android:layout_marginTop="5dp"
